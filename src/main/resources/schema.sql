@@ -9,6 +9,8 @@ CREATE TABLE organization (
     is_active BIT,
 );
 
+CREATE INDEX IX_organization_name ON organization (name);
+
 CREATE TABLE office (
     id INT AUTO_INCREMENT PRIMARY KEY,
     org_id INT NOT NULL,
@@ -18,6 +20,9 @@ CREATE TABLE office (
     is_active BIT,
     FOREIGN KEY(org_id) REFERENCES organization(id)
 );
+
+CREATE INDEX IX_office_org_id ON office(org_id);
+
 
 CREATE TABLE user (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -37,8 +42,11 @@ CREATE TABLE user (
     FOREIGN KEY(country_id) REFERENCES country(id)
 );
 
+CREATE INDEX IX_user_office_id ON user(office_id);
+
+
 CREATE TABLE document (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    id INT NOT NULL UNIQUE REFERENCES user(id),
     document_name VARCHAR (50),
     document_number VARCHAR (30),
     document_date DATE

@@ -41,11 +41,9 @@ public class User {
     @JoinColumn(name = "country_id")
     private Country country;
 
-    @OneToOne
-    @JoinColumn(name = "document_id")
-    private Document document;
 
-    public User(int id, String firstName, String secondName, String middleName, String position, Long phone, boolean isActive, Office office, Doc doc, Country country, Document document) {
+
+    public User(int id, String firstName, String secondName, String middleName, String position, Long phone, boolean isActive, Office office, Doc doc, Country country) {
         this.id = id;
         this.firstName = firstName;
         this.secondName = secondName;
@@ -56,7 +54,6 @@ public class User {
         this.office = office;
         this.doc = doc;
         this.country = country;
-        this.document = document;
     }
 
     public User() {
@@ -138,11 +135,4 @@ public class User {
         this.country = country;
     }
 
-    public Document getDocument() {
-        return document;
-    }
-
-    public void setDocument(Document document) {
-        this.document = document;
-    }
 }

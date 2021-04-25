@@ -7,7 +7,6 @@ import java.util.Date;
 @Table(name = "document")
 public class Document {
     @Id
-    @GeneratedValue
     @Column(name = "id")
     private Long id;
 
@@ -20,10 +19,16 @@ public class Document {
     @Column(name = "document_date")
     private Date documentDate;
 
-    public Document(String documentName, long documentNumber, Date documentDate) {
+    @OneToOne
+    @MapsId
+    @JoinColumn(name = "id")
+    private User user;
+
+    public Document(String documentName, long documentNumber, Date documentDate, User user) {
         this.documentName = documentName;
         this.documentNumber = documentNumber;
         this.documentDate = documentDate;
+        this.user = user;
     }
 
     public Document() {
