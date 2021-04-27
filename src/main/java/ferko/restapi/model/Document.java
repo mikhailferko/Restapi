@@ -10,6 +10,9 @@ public class Document {
     @Column(name = "id")
     private Long id;
 
+    @Version
+    private Integer version;
+
     @Column(name = "document_name", length = 50)
     private String documentName;
 
@@ -64,5 +67,13 @@ public class Document {
 
     public void setDocumentDate(Date documentDate) {
         this.documentDate = documentDate;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

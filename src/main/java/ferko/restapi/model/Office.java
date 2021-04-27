@@ -10,6 +10,9 @@ public class Office {
     @Column(name = "id")
     private int id;
 
+    @Version
+    private Integer version;
+
     @Column(name = "name", length = 40, nullable = false)
     private String name;
 

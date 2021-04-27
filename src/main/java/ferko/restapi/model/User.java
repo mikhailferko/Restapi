@@ -11,6 +11,9 @@ public class User {
     @Column(name = "id")
     private int id;
 
+    @Version
+    private Integer version;
+
     @Column(name = "first_name", length = 30, nullable = false)
     private String firstName;
 

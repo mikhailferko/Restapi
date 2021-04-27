@@ -14,9 +14,9 @@ public class Doc {
     private String docName;
 
     @Column(name = "doc_code", length = 10)
-    private long docCode;
+    private int docCode;
 
-    public Doc(String docName, long docCode) {
+    public Doc(String docName, int docCode) {
         this.docName = docName;
         this.docCode = docCode;
     }
@@ -40,11 +40,11 @@ public class Doc {
         this.docName = docName;
     }
 
-    public long getDocCode() {
+    public int getDocCode() {
         return docCode;
     }
 
-    public void setDocCode(long docCode) {
+    public void setDocCode(int docCode) {
         this.docCode = docCode;
     }
 }

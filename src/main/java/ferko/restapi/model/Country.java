@@ -8,15 +8,15 @@ public class Country {
     @Id
     @GeneratedValue
     @Column(name = "id")
-    private Long id;
+    private int id;
 
     @Column(name = "country_name", length = 50)
     private String countryName;
 
     @Column(name = "country_code", length = 10)
-    private long countryCode;
+    private int countryCode;
 
-    public Country(String countryName, long countryCode) {
+    public Country(String countryName, int countryCode) {
         this.countryName = countryName;
         this.countryCode = countryCode;
     }
@@ -24,11 +24,11 @@ public class Country {
     public Country() {
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -40,11 +40,11 @@ public class Country {
         this.countryName = countryName;
     }
 
-    public long getCountryCode() {
+    public int getCountryCode() {
         return countryCode;
     }
 
-    public void setCountryCode(long countryCode) {
+    public void setCountryCode(int countryCode) {
         this.countryCode = countryCode;
     }
 }

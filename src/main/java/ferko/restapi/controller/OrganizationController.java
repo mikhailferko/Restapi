@@ -1,7 +1,10 @@
 package ferko.restapi.controller;
 
-import ferko.restapi.Service.Organization.OrganizationService;
-import ferko.restapi.model.Organization;
+import ferko.restapi.service.organization.OrganizationService;
+import ferko.restapi.dto.organization.OrganizationFilterInDto;
+import ferko.restapi.dto.organization.OrganizationFilterOutDto;
+import ferko.restapi.dto.organization.OrganizationSaveDto;
+import ferko.restapi.dto.organization.OrganizationUpdateAndGetDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -10,28 +13,33 @@ import java.util.List;
 @RequestMapping("organization")
 public class OrganizationController {
 
-    OrganizationService organizationService;
+    private final OrganizationService organizationService;
 
     @Autowired
     public OrganizationController(OrganizationService organizationService) {
         this.organizationService = organizationService;
     }
 
+    @PostMapping("list")
+    public List<OrganizationFilterOutDto> filter(@RequestBody OrganizationFilterInDto organizationFilterInDTO){
+        return organizationService.filter(organizationFilterInDTO);
+    }
+
     @GetMapping("{id}")
-    public Organization getOrg(@PathVariable int id){
+    public OrganizationUpdateAndGetDto getOrg(@PathVariable int id){
         return organizationService.findById(id);
     }
 
-
-    @PostMapping
-    public String saveOrg(@RequestBody Organization organization){
-        organizationService.save(organization);
+    @PostMapping("save")
+    public String saveOrg(@RequestBody OrganizationSaveDto organizationSaveDTO){
+        organizationService.save(organizationSaveDTO);
         return "success";
     }
 
-    @PostMapping("list")
-    public List<Organization> filter(@RequestBody String name){
-        return organizationService.filter(name);
+    @PostMapping("update")
+    public String updateOrg(@RequestBody OrganizationUpdateAndGetDto organizationUpdateAndGetDTO){
+        organizationService.update(organizationUpdateAndGetDTO);
+        return "success";
     }
 
 

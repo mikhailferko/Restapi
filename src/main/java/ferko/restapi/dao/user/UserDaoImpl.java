@@ -2,11 +2,13 @@ package ferko.restapi.dao.user;
 
 import ferko.restapi.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
+@Repository
 public class UserDaoImpl implements UserDao{
 
     private final EntityManager em;
@@ -16,11 +18,6 @@ public class UserDaoImpl implements UserDao{
         this.em = em;
     }
 
-    @Override
-    public List<User> list() {
-        TypedQuery<User> query = em.createQuery("SELECT u FROM User u", User.class);
-        return query.getResultList();
-    }
 
     @Override
     public User findById(int id) {
@@ -33,7 +30,14 @@ public class UserDaoImpl implements UserDao{
     }
 
     @Override
-    public void update(User user, int id) {
+    public void update(User user) {
 
     }
+
+    @Override
+    public List<User> filter(String name) {
+        return null;
+    }
+
+
 }

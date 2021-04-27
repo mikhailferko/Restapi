@@ -35,8 +35,8 @@ public class OfficeDaoImpl implements OfficeDao{
     }
 
     @Override
-    public void update(Office office, int id) {
-        Office officefromDB = em.find(Office.class, id);
+    public void update(Office office) {
+        Office officefromDB = em.find(Office.class, office.getId());
         officefromDB.setActive(office.isActive());
         officefromDB.setAddress(office.getAddress());
         officefromDB.setName(office.getName());

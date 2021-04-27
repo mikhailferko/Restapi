@@ -28,7 +28,7 @@ public class OrganizationDaoImpl implements OrganizationDao {
         return em.find(Organization.class, id);
     }
 
-    @Transactional
+
     @Override
     public void save(Organization organization) {
         em.persist(organization);
@@ -37,23 +37,23 @@ public class OrganizationDaoImpl implements OrganizationDao {
     @Override
     public void update(Organization organization){
         Organization organizationfromDB = em.find(Organization.class, organization.getId());
+        organizationfromDB.setName(organization.getName());
+        organizationfromDB.setFullName(organization.getFullName());
         organizationfromDB.setActive(organization.isActive());
         organizationfromDB.setAddress(organization.getAddress());
         organizationfromDB.setInn(organization.getInn());
         organizationfromDB.setPhone(organization.getPhone());
         organizationfromDB.setKpp(organization.getKpp());
-        organizationfromDB.setName(organization.getName());
-        organizationfromDB.setFullName(organization.getFullName());
-        em.persist(organizationfromDB);
+        em.flush();
     }
 
-    @Transactional
+
     @Override
     public List<Organization> filter(String name) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Organization> orgCriteria = cb.createQuery(Organization.class);
         Root<Organization> orgRoot = orgCriteria.from(Organization.class);
-        orgCriteria.select(orgRoot);
+        //orgCriteria.select(orgRoot);
         orgCriteria.where(cb.equal(orgRoot.get("name"), name));
         return em.createQuery(orgCriteria).getResultList();
     }
