@@ -7,12 +7,12 @@ import javax.persistence.*;
 public class User {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
 
     @Version
-    private Integer version;
+    private Integer version = 0;
 
     @Column(name = "first_name", length = 30, nullable = false)
     private String firstName;
@@ -29,34 +29,32 @@ public class User {
     @Column(name = "phone", length = 11)
     private Long phone;
 
-    @Column(name = "is_active")
-    private boolean isActive;
+    @Column(name = "is_identified")
+    private boolean isIdentified;
 
     @ManyToOne
     @JoinColumn(name = "office_id")
     private Office office;
 
     @ManyToOne
-    @JoinColumn(name = "doc_id")
-    private Doc doc;
-
-    @ManyToOne
     @JoinColumn(name = "country_id")
     private Country country;
 
+    @OneToOne
+    private Document document;
 
 
-    public User(int id, String firstName, String secondName, String middleName, String position, Long phone, boolean isActive, Office office, Doc doc, Country country) {
+    public User(int id, String firstName, String secondName, String middleName, String position, Long phone, boolean isIdentified, Office office, Country country, Document document) {
         this.id = id;
         this.firstName = firstName;
         this.secondName = secondName;
         this.middleName = middleName;
         this.position = position;
         this.phone = phone;
-        this.isActive = isActive;
+        this.isIdentified = isIdentified;
         this.office = office;
-        this.doc = doc;
         this.country = country;
+        this.document = document;
     }
 
     public User() {
@@ -106,12 +104,12 @@ public class User {
         this.phone = phone;
     }
 
-    public boolean isActive() {
-        return isActive;
+    public boolean isIdentified() {
+        return isIdentified;
     }
 
-    public void setActive(boolean active) {
-        isActive = active;
+    public void setIdentified(boolean identified) {
+        isIdentified = identified;
     }
 
     public Office getOffice() {
@@ -122,14 +120,6 @@ public class User {
         this.office = office;
     }
 
-    public Doc getDoc() {
-        return doc;
-    }
-
-    public void setDoc(Doc doc) {
-        this.doc = doc;
-    }
-
     public Country getCountry() {
         return country;
     }
@@ -138,4 +128,11 @@ public class User {
         this.country = country;
     }
 
+    public Document getDocument() {
+        return document;
+    }
+
+    public void setDocument(Document document) {
+        this.document = document;
+    }
 }

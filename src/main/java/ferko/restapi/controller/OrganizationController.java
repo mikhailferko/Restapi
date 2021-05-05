@@ -31,15 +31,13 @@ public class OrganizationController {
     }
 
     @PostMapping("save")
-    public String saveOrg(@RequestBody OrganizationSaveDto organizationSaveDTO){
+    public void saveOrg(@RequestBody OrganizationSaveDto organizationSaveDTO){
         organizationService.save(organizationSaveDTO);
-        return "success";
     }
 
     @PostMapping("update")
-    public String updateOrg(@RequestBody OrganizationUpdateAndGetDto organizationUpdateAndGetDTO){
+    public void updateOrg(@RequestBody OrganizationUpdateAndGetDto organizationUpdateAndGetDTO){
         organizationService.update(organizationUpdateAndGetDTO);
-        return "success";
     }
 
 

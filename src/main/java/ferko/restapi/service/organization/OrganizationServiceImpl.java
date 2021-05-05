@@ -28,7 +28,8 @@ public class OrganizationServiceImpl implements OrganizationService{
     @Override
     public OrganizationUpdateAndGetDto findById(int id) {
         Organization organization = organizationDao.findById(id);
-        return mapperFacade.map(organization, OrganizationUpdateAndGetDto.class);
+        OrganizationUpdateAndGetDto org = mapperFacade.map(organization, OrganizationUpdateAndGetDto.class);
+        return org;
     }
 
     @Transactional
@@ -42,15 +43,15 @@ public class OrganizationServiceImpl implements OrganizationService{
     @Override
     public void update(OrganizationUpdateAndGetDto organizationUpdateDTO) {
         Organization organization = mapperFacade.map(organizationUpdateDTO, Organization.class);
-        organizationDao.update(organization);
+        organizationDao.update(organization, organizationUpdateDTO.getId());
     }
 
 
     @Transactional
     @Override
     public List<OrganizationFilterOutDto> filter(OrganizationFilterInDto organizationFilterDTO) {
-        //Organization organization = mapperFacade.map(organizationFilterDTO, Organization.class);
-        List<Organization> list = organizationDao.filter(organizationFilterDTO.getName());
+        Organization organization = mapperFacade.map(organizationFilterDTO, Organization.class);
+        List<Organization> list = organizationDao.filter(organization);
         return mapperFacade.mapAsList(list, OrganizationFilterOutDto.class);
     }
 }

@@ -29,14 +29,12 @@ public class UserController {
     }
 
     @PostMapping("save")
-    public String saveUser(@RequestBody UserSaveDto userSaveDTO){
+    public void saveUser(@RequestBody UserSaveDto userSaveDTO){
         userService.save(userSaveDTO);
-        return "success";
     }
 
     @PostMapping("update")
-    public String updateUser(@RequestBody UserUpdateDto userUpdateDTO){
+    public void updateUser(@RequestBody UserUpdateDto userUpdateDTO){
         userService.update(userUpdateDTO);
-        return "success";
     }
 }

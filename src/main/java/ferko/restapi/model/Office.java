@@ -6,12 +6,12 @@ import javax.persistence.*;
 @Table(name = "office")
 public class Office {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
 
     @Version
-    private Integer version;
+    private Integer version = 0;
 
     @Column(name = "name", length = 40, nullable = false)
     private String name;
@@ -43,6 +43,10 @@ public class Office {
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {

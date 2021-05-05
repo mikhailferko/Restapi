@@ -10,7 +10,7 @@ public interface OrganizationDao {
 
     void save(Organization organization);
 
-    void update(Organization organization);
+    void update(Organization organization, int id);
 
-    List<Organization> filter(String name);
+    List<Organization> filter(Organization organization);
 }

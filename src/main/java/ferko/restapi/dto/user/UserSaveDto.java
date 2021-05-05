@@ -26,10 +26,10 @@ public class UserSaveDto {
 
     private int citizenshipCode;
 
-    private boolean isActive;
+    private boolean isIdentified;
 
 
-    public UserSaveDto(int officeId, String firstName, String secondName, String middleName, String position, Long phone, int docCode, String docName, Long docNumber, Date docDate, int citizenshipCode, boolean isActive) {
+    public UserSaveDto(int officeId, String firstName, String secondName, String middleName, String position, Long phone, int docCode, String docName, Long docNumber, Date docDate, int citizenshipCode, boolean isIdentified) {
         this.officeId = officeId;
         this.firstName = firstName;
         this.secondName = secondName;
@@ -41,7 +41,7 @@ public class UserSaveDto {
         this.docNumber = docNumber;
         this.docDate = docDate;
         this.citizenshipCode = citizenshipCode;
-        this.isActive = isActive;
+        this.isIdentified = isIdentified;
     }
 
     public UserSaveDto() {
@@ -135,11 +135,11 @@ public class UserSaveDto {
         this.citizenshipCode = citizenshipCode;
     }
 
-    public boolean isActive() {
-        return isActive;
+    public boolean isIdentified() {
+        return isIdentified;
     }
 
-    public void setActive(boolean active) {
-        isActive = active;
+    public void setIdentified(boolean identified) {
+        isIdentified = identified;
     }
 }

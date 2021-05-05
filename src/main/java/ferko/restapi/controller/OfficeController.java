@@ -32,14 +32,12 @@ public class OfficeController {
     }
 
     @PostMapping("save")
-    public String saveOffice(@RequestBody OfficeSaveDto officeSaveDTO){
+    public void saveOffice(@RequestBody OfficeSaveDto officeSaveDTO){
         officeService.save(officeSaveDTO);
-        return "success";
     }
 
     @PostMapping("update")
-    public String updateOffice(@RequestBody OfficeUpdateAndGetDto officeUpdateAndGetDTO){
+    public void updateOffice(@RequestBody OfficeUpdateAndGetDto officeUpdateAndGetDTO){
         officeService.update(officeUpdateAndGetDTO);
-        return "success";
     }
 }

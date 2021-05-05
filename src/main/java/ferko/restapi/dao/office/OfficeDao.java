@@ -5,11 +5,11 @@ import java.util.List;
 
 public interface OfficeDao {
 
-    List<Office> list();
+    List<Office> filter(Office office);
 
     Office findById(int id);
 
     void save(Office office);
 
-    void update(Office office);
+    void update(Office office, int id);
 }

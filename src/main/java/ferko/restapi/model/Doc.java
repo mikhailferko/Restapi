@@ -6,9 +6,9 @@ import javax.persistence.*;
 @Table(name = "doc")
 public class Doc {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Long id;
+    private int id;
 
     @Column(name = "doc_name", length = 50)
     private String docName;
@@ -24,11 +24,11 @@ public class Doc {
     public Doc() {
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

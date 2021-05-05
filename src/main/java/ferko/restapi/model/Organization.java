@@ -12,7 +12,7 @@ public class Organization {
     private int id;
 
     @Version
-    private Integer version;
+    private Integer version = 0;
 
     @Column(name = "name", length = 40, nullable = false)
     private String name;
@@ -51,6 +51,10 @@ public class Organization {
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {

@@ -12,4 +12,6 @@ public interface DocRepository extends JpaRepository<Doc, Integer> {
     Optional<Doc> findById(Integer id);
 
     Optional<Doc> findByDocCode(int docCode);
+
+    Optional<Doc> findByDocName(String name);
 }

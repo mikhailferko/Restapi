@@ -8,13 +8,10 @@ import java.util.Date;
 public class Document {
     @Id
     @Column(name = "id")
-    private Long id;
+    private int id;
 
     @Version
-    private Integer version;
-
-    @Column(name = "document_name", length = 50)
-    private String documentName;
+    private Integer version = 0;
 
     @Column(name = "document_number", length = 30)
     private long documentNumber;
@@ -22,35 +19,31 @@ public class Document {
     @Column(name = "document_date")
     private Date documentDate;
 
+    @ManyToOne
+    @JoinColumn(name = "doc_id")
+    private Doc doc;
+
     @OneToOne
     @MapsId
     @JoinColumn(name = "id")
     private User user;
 
-    public Document(String documentName, long documentNumber, Date documentDate, User user) {
-        this.documentName = documentName;
+    public Document(long documentNumber, Date documentDate, Doc doc, User user) {
         this.documentNumber = documentNumber;
         this.documentDate = documentDate;
+        this.doc = doc;
         this.user = user;
     }
 
     public Document() {
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
-    }
-
-    public String getDocumentName() {
-        return documentName;
-    }
-
-    public void setDocumentName(String documentName) {
-        this.documentName = documentName;
     }
 
     public long getDocumentNumber() {
@@ -67,6 +60,14 @@ public class Document {
 
     public void setDocumentDate(Date documentDate) {
         this.documentDate = documentDate;
+    }
+
+    public Doc getDoc() {
+        return doc;
+    }
+
+    public void setDoc(Doc doc) {
+        this.doc = doc;
     }
 
     public User getUser() {

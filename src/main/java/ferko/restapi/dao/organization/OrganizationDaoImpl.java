@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -34,26 +33,27 @@ public class OrganizationDaoImpl implements OrganizationDao {
     }
 
     @Override
-    public void update(Organization organization){
-        Organization organizationfromDB = em.find(Organization.class, organization.getId());
-        organizationfromDB.setName(organization.getName());
-        organizationfromDB.setFullName(organization.getFullName());
-        organizationfromDB.setActive(organization.isActive());
-        organizationfromDB.setAddress(organization.getAddress());
-        organizationfromDB.setInn(organization.getInn());
-        organizationfromDB.setPhone(organization.getPhone());
-        organizationfromDB.setKpp(organization.getKpp());
-        em.flush();
+    public void update(Organization organization, int id){
+        Organization organizationFromDB = em.find(Organization.class, id);
+        organizationFromDB.setName(organization.getName());
+        organizationFromDB.setFullName(organization.getFullName());
+        organizationFromDB.setActive(organization.isActive());
+        organizationFromDB.setAddress(organization.getAddress());
+        organizationFromDB.setInn(organization.getInn());
+        organizationFromDB.setPhone(organization.getPhone());
+        organizationFromDB.setKpp(organization.getKpp());
     }
 
 
     @Override
-    public List<Organization> filter(String name) {
+    public List<Organization> filter(Organization organization) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Organization> orgCriteria = cb.createQuery(Organization.class);
         Root<Organization> orgRoot = orgCriteria.from(Organization.class);
-        //orgCriteria.select(orgRoot);
-        orgCriteria.where(cb.equal(orgRoot.get("name"), name));
+        orgCriteria.select(orgRoot);
+        orgCriteria.where(cb.and(cb.equal(orgRoot.get("name"), organization.getName()),
+                cb.equal(orgRoot.get("inn"), organization.getInn()),
+                cb.equal(orgRoot.get("isActive"), organization.isActive())));
         return em.createQuery(orgCriteria).getResultList();
     }
 }

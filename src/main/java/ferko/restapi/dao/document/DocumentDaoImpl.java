@@ -29,7 +29,6 @@ public class DocumentDaoImpl implements DocumentDao{
     @Override
     public void update(Document document) {
         Document documentfromDB = em.find(Document.class, document.getId());
-        documentfromDB.setDocumentName(document.getDocumentName());
         documentfromDB.setDocumentNumber(document.getDocumentNumber());
         documentfromDB.setDocumentDate(document.getDocumentDate());
         em.persist(documentfromDB);

@@ -10,7 +10,7 @@ public interface UserDao {
 
     void save(User user);
 
-    void update(User user);
+    void update(User user, int id);
 
-    List<User> filter(String name);
+    List<User> filter(User user);
 }

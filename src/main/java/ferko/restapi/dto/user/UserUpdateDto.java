@@ -26,9 +26,9 @@ public class UserUpdateDto {
 
     private int citizenshipCode;
 
-    private boolean isActive;
+    private boolean isIdentified;
 
-    public UserUpdateDto(int id, int officeId, String firstName, String secondName, String middleName, String position, Long phone, String docName, Long docNumber, Date docDate, int citizenshipCode, boolean isActive) {
+    public UserUpdateDto(int id, int officeId, String firstName, String secondName, String middleName, String position, Long phone, String docName, Long docNumber, Date docDate, int citizenshipCode, boolean isIdentified) {
         this.id = id;
         this.officeId = officeId;
         this.firstName = firstName;
@@ -40,7 +40,7 @@ public class UserUpdateDto {
         this.docNumber = docNumber;
         this.docDate = docDate;
         this.citizenshipCode = citizenshipCode;
-        this.isActive = isActive;
+        this.isIdentified = isIdentified;
     }
 
     public UserUpdateDto() {
@@ -134,11 +134,11 @@ public class UserUpdateDto {
         this.citizenshipCode = citizenshipCode;
     }
 
-    public boolean isActive() {
-        return isActive;
+    public boolean isIdentified() {
+        return isIdentified;
     }
 
-    public void setActive(boolean active) {
-        isActive = active;
+    public void setIdentified(boolean identified) {
+        isIdentified = identified;
     }
 }
