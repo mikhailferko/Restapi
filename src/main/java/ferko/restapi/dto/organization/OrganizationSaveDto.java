@@ -1,22 +1,36 @@
 package ferko.restapi.dto.organization;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class OrganizationSaveDto {
 
+    @Size(max = 40)
+    @NotBlank
     private String name;
 
+    @Size(max = 100)
+    @NotBlank
     private String fullName;
 
+    @Size(max = 10)
+    @NotNull
     private Long inn;
 
+    @Size(max = 9)
+    @NotNull
     private Long kpp;
 
+    @Size(max = 100)
+    @NotBlank
     private String address;
 
     private Long phone;
 
-    private boolean isActive;
+    private Boolean isActive;
 
-    public OrganizationSaveDto(String name, String fullName, Long inn, Long kpp, String address, Long phone, boolean isActive) {
+    public OrganizationSaveDto(String name, String fullName, Long inn, Long kpp, String address, Long phone, Boolean isActive) {
         this.name = name;
         this.fullName = fullName;
         this.inn = inn;
@@ -77,11 +91,11 @@ public class OrganizationSaveDto {
         this.phone = phone;
     }
 
-    public boolean isActive() {
+    public Boolean isActive() {
         return isActive;
     }
 
-    public void setActive(boolean active) {
+    public void setActive(Boolean active) {
         isActive = active;
     }
 }

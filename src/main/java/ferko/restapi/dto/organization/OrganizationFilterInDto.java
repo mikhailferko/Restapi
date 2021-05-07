@@ -1,14 +1,19 @@
 package ferko.restapi.dto.organization;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
 public class OrganizationFilterInDto {
 
+    @Size(max = 40)
+    @NotBlank
     private String name;
 
     private Long inn;
 
-    private boolean isActive;
+    private Boolean isActive;
 
-    public OrganizationFilterInDto(String name, Long inn, boolean isActive) {
+    public OrganizationFilterInDto(String name, Long inn, Boolean isActive) {
         this.name = name;
         this.inn = inn;
         this.isActive = isActive;
@@ -33,11 +38,11 @@ public class OrganizationFilterInDto {
         this.inn = inn;
     }
 
-    public boolean isActive() {
+    public Boolean isActive() {
         return isActive;
     }
 
-    public void setActive(boolean active) {
+    public void setActive(Boolean active) {
         isActive = active;
     }
 }

@@ -1,17 +1,25 @@
 package ferko.restapi.dto.user;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 public class UserSaveDto {
 
+    @NotNull
     private int officeId;
 
+    @Size(max = 30)
+    @NotBlank
     private String firstName;
 
     private String secondName;
 
     private String middleName;
 
+    @Size(max = 30)
+    @NotBlank
     private String position;
 
     private Long phone;
@@ -26,10 +34,10 @@ public class UserSaveDto {
 
     private int citizenshipCode;
 
-    private boolean isIdentified;
+    private Boolean isIdentified;
 
 
-    public UserSaveDto(int officeId, String firstName, String secondName, String middleName, String position, Long phone, int docCode, String docName, Long docNumber, Date docDate, int citizenshipCode, boolean isIdentified) {
+    public UserSaveDto(int officeId, String firstName, String secondName, String middleName, String position, Long phone, int docCode, String docName, Long docNumber, Date docDate, int citizenshipCode, Boolean isIdentified) {
         this.officeId = officeId;
         this.firstName = firstName;
         this.secondName = secondName;
@@ -135,11 +143,11 @@ public class UserSaveDto {
         this.citizenshipCode = citizenshipCode;
     }
 
-    public boolean isIdentified() {
+    public Boolean isIdentified() {
         return isIdentified;
     }
 
-    public void setIdentified(boolean identified) {
+    public void setIdentified(Boolean identified) {
         isIdentified = identified;
     }
 }

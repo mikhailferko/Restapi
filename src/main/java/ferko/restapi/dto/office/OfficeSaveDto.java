@@ -1,7 +1,10 @@
 package ferko.restapi.dto.office;
 
+import javax.validation.constraints.NotNull;
+
 public class OfficeSaveDto {
 
+    @NotNull
     private int orgId;
 
     private String name;
@@ -10,9 +13,9 @@ public class OfficeSaveDto {
 
     private Long phone;
 
-    private boolean isActive;
+    private Boolean isActive;
 
-    public OfficeSaveDto(int orgId, String name, String address, Long phone, boolean isActive) {
+    public OfficeSaveDto(int orgId, String name, String address, Long phone, Boolean isActive) {
         this.orgId = orgId;
         this.name = name;
         this.address = address;
@@ -55,11 +58,11 @@ public class OfficeSaveDto {
         this.phone = phone;
     }
 
-    public boolean isActive() {
+    public Boolean isActive() {
         return isActive;
     }
 
-    public void setActive(boolean active) {
+    public void setActive(Boolean active) {
         isActive = active;
     }
 }

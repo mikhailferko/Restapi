@@ -83,9 +83,10 @@ public class UserServiceImpl implements UserService{
     public List<UserFilterOutDto> filter(UserFilterInDto userFilterInDTO) {
         User user = mapperFacade.map(userFilterInDTO, User.class);
         user.setOffice(officeDao.findById(userFilterInDTO.getOfficeId()));
-
-        user.setCountry(countryRepository.findByCountryCode(userFilterInDTO.getCitizenshipCode()).get());
-        List<User> list = userDao.filter(user);
+        if (userFilterInDTO.getCitizenshipCode() != 0) {
+            user.setCountry(countryRepository.findByCountryCode(userFilterInDTO.getCitizenshipCode()).get());
+        }
+        List<User> list = userDao.filter(user, userFilterInDTO.getDocCode());
 
         return mapperFacade.mapAsList(list, UserFilterOutDto.class);
     }

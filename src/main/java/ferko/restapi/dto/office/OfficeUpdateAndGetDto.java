@@ -1,18 +1,27 @@
 package ferko.restapi.dto.office;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class OfficeUpdateAndGetDto {
 
+    @NotNull
     private int id;
 
+    @Size(max = 40)
+    @NotBlank
     private String name;
 
+    @Size(max = 100)
+    @NotBlank
     private String address;
 
     private Long phone;
 
-    private boolean isActive;
+    private Boolean isActive;
 
-    public OfficeUpdateAndGetDto(int id, String name, String address, Long phone, boolean isActive) {
+    public OfficeUpdateAndGetDto(int id, String name, String address, Long phone, Boolean isActive) {
         this.id = id;
         this.name = name;
         this.address = address;
@@ -55,11 +64,11 @@ public class OfficeUpdateAndGetDto {
         this.phone = phone;
     }
 
-    public boolean isActive() {
+    public Boolean isActive() {
         return isActive;
     }
 
-    public void setActive(boolean active) {
+    public void setActive(Boolean active) {
         isActive = active;
     }
 }

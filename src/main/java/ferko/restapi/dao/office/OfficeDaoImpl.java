@@ -27,10 +27,42 @@ public class OfficeDaoImpl implements OfficeDao{
         CriteriaQuery<Office> orgCriteria = cb.createQuery(Office.class);
         Root<Office> orgRoot = orgCriteria.from(Office.class);
         orgCriteria.select(orgRoot);
-        orgCriteria.where(cb.and(cb.equal(orgRoot.get("organization"), office.getOrganization()),
-                cb.equal(orgRoot.get("name"), office.getName()),
-                cb.equal(orgRoot.get("phone"), office.getPhone()),
-                cb.equal(orgRoot.get("isActive"), office.isActive())));
+        if (office.getName() != null && office.getPhone() != null && office.isActive() != null) {
+            orgCriteria.where(cb.and(cb.equal(orgRoot.get("organization"), office.getOrganization()),
+                    cb.equal(orgRoot.get("name"), office.getName()),
+                    cb.equal(orgRoot.get("phone"), office.getPhone()),
+                    cb.equal(orgRoot.get("isActive"), office.isActive())));
+        }
+        else if (office.getName() != null && office.getPhone() != null) {
+            orgCriteria.where(cb.and(cb.equal(orgRoot.get("organization"), office.getOrganization()),
+                    cb.equal(orgRoot.get("name"), office.getName()),
+                    cb.equal(orgRoot.get("phone"), office.getPhone())));
+        }
+        else if (office.getName() != null && office.isActive() != null) {
+            orgCriteria.where(cb.and(cb.equal(orgRoot.get("organization"), office.getOrganization()),
+                    cb.equal(orgRoot.get("name"), office.getName()),
+                    cb.equal(orgRoot.get("isActive"), office.isActive())));
+        }
+        else if (office.getPhone() != null && office.isActive() != null) {
+            orgCriteria.where(cb.and(cb.equal(orgRoot.get("organization"), office.getOrganization()),
+                    cb.equal(orgRoot.get("phone"), office.getPhone()),
+                    cb.equal(orgRoot.get("isActive"), office.isActive())));
+        }
+        else if (office.getName() != null) {
+            orgCriteria.where(cb.and(cb.equal(orgRoot.get("organization"), office.getOrganization()),
+                    cb.equal(orgRoot.get("name"), office.getName())));
+        }
+        else if (office.getPhone() != null) {
+            orgCriteria.where(cb.and(cb.equal(orgRoot.get("organization"), office.getOrganization()),
+                    cb.equal(orgRoot.get("phone"), office.getPhone())));
+        }
+        else if (office.isActive() != null) {
+            orgCriteria.where(cb.and(cb.equal(orgRoot.get("organization"), office.getOrganization()),
+                    cb.equal(orgRoot.get("isActive"), office.isActive())));
+        }
+        else {
+            orgCriteria.where(cb.and(cb.equal(orgRoot.get("organization"), office.getOrganization())));
+        }
         return em.createQuery(orgCriteria).getResultList();
     }
 

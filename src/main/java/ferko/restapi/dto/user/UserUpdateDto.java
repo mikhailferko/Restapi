@@ -1,19 +1,27 @@
 package ferko.restapi.dto.user;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 public class UserUpdateDto {
 
+    @NotNull
     private int id;
 
     private int officeId;
 
+    @Size(max = 30)
+    @NotBlank
     private String firstName;
 
     private String secondName;
 
     private String middleName;
 
+    @Size(max = 30)
+    @NotBlank
     private String position;
 
     private Long phone;
@@ -26,9 +34,9 @@ public class UserUpdateDto {
 
     private int citizenshipCode;
 
-    private boolean isIdentified;
+    private Boolean isIdentified;
 
-    public UserUpdateDto(int id, int officeId, String firstName, String secondName, String middleName, String position, Long phone, String docName, Long docNumber, Date docDate, int citizenshipCode, boolean isIdentified) {
+    public UserUpdateDto(int id, int officeId, String firstName, String secondName, String middleName, String position, Long phone, String docName, Long docNumber, Date docDate, int citizenshipCode, Boolean isIdentified) {
         this.id = id;
         this.officeId = officeId;
         this.firstName = firstName;
@@ -134,11 +142,11 @@ public class UserUpdateDto {
         this.citizenshipCode = citizenshipCode;
     }
 
-    public boolean isIdentified() {
+    public Boolean isIdentified() {
         return isIdentified;
     }
 
-    public void setIdentified(boolean identified) {
+    public void setIdentified(Boolean identified) {
         isIdentified = identified;
     }
 }

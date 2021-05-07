@@ -1,16 +1,19 @@
 package ferko.restapi.dto.office;
 
+import javax.validation.constraints.NotNull;
+
 public class OfficeFilterInDto {
 
+    @NotNull
     private int orgId;
 
     private String name;
 
     private Long phone;
 
-    private boolean isActive;
+    private Boolean isActive;
 
-    public OfficeFilterInDto(int orgId, String name, Long phone, boolean isActive) {
+    public OfficeFilterInDto(int orgId, String name, Long phone, Boolean isActive) {
         this.orgId = orgId;
         this.name = name;
         this.phone = phone;
@@ -44,11 +47,11 @@ public class OfficeFilterInDto {
         this.phone = phone;
     }
 
-    public boolean isActive() {
+    public Boolean isActive() {
         return isActive;
     }
 
-    public void setActive(boolean active) {
+    public void setActive(Boolean active) {
         isActive = active;
     }
 }

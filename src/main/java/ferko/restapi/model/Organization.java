@@ -33,9 +33,9 @@ public class Organization {
     private Long phone;
 
     @Column(name = "is_active")
-    private boolean isActive;
+    private Boolean isActive;
 
-    public Organization(int id, String name, String fullName, Long inn, Long kpp, String address, Long phone, boolean isActive) {
+    public Organization(int id, String name, String fullName, Long inn, Long kpp, String address, Long phone, Boolean isActive) {
         this.id = id;
         this.name = name;
         this.fullName = fullName;
@@ -105,11 +105,11 @@ public class Organization {
         this.phone = phone;
     }
 
-    public boolean isActive() {
+    public Boolean isActive() {
         return isActive;
     }
 
-    public void setActive(boolean active) {
+    public void setActive(Boolean active) {
         isActive = active;
     }
 }

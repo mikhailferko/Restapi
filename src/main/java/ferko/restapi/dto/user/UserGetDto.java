@@ -26,9 +26,9 @@ public class UserGetDto {
 
     private int citizenshipCode;
 
-    private boolean isIdentified;
+    private Boolean isIdentified;
 
-    public UserGetDto(int id, String firstName, String secondName, String middleName, String position, Long phone, String docName, Long docNumber, Date docDate, String citizenshipName, int citizenshipCode, boolean isIdentified) {
+    public UserGetDto(int id, String firstName, String secondName, String middleName, String position, Long phone, String docName, Long docNumber, Date docDate, String citizenshipName, int citizenshipCode, Boolean isIdentified) {
         this.id = id;
         this.firstName = firstName;
         this.secondName = secondName;
@@ -134,11 +134,11 @@ public class UserGetDto {
         this.citizenshipCode = citizenshipCode;
     }
 
-    public boolean isIdentified() {
+    public Boolean isIdentified() {
         return isIdentified;
     }
 
-    public void setIdentified(boolean identified) {
+    public void setIdentified(Boolean identified) {
         isIdentified = identified;
     }
 }

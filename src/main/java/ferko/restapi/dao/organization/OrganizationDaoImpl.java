@@ -51,9 +51,22 @@ public class OrganizationDaoImpl implements OrganizationDao {
         CriteriaQuery<Organization> orgCriteria = cb.createQuery(Organization.class);
         Root<Organization> orgRoot = orgCriteria.from(Organization.class);
         orgCriteria.select(orgRoot);
-        orgCriteria.where(cb.and(cb.equal(orgRoot.get("name"), organization.getName()),
-                cb.equal(orgRoot.get("inn"), organization.getInn()),
-                cb.equal(orgRoot.get("isActive"), organization.isActive())));
+        if (organization.getInn() != null && organization.isActive() != null) {
+            orgCriteria.where(cb.and(cb.equal(orgRoot.get("name"), organization.getName()),
+                    cb.equal(orgRoot.get("inn"), organization.getInn()),
+                    cb.equal(orgRoot.get("isActive"), organization.isActive())));
+        }
+        else if (organization.getInn() != null) {
+            orgCriteria.where(cb.and(cb.equal(orgRoot.get("name"), organization.getName()),
+                    cb.equal(orgRoot.get("inn"), organization.getInn())));
+        }
+        else if (organization.isActive() != null) {
+            orgCriteria.where(cb.and(cb.equal(orgRoot.get("name"), organization.getName()),
+                    cb.equal(orgRoot.get("isActive"), organization.isActive())));
+        }
+        else {
+            orgCriteria.where(cb.and(cb.equal(orgRoot.get("name"), organization.getName())));
+        }
         return em.createQuery(orgCriteria).getResultList();
     }
 }

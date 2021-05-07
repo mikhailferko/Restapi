@@ -6,9 +6,9 @@ public class OrganizationFilterOutDto {
 
     private String name;
 
-    private boolean isActive;
+    private Boolean isActive;
 
-    public OrganizationFilterOutDto(int id, String name, boolean isActive) {
+    public OrganizationFilterOutDto(int id, String name, Boolean isActive) {
         this.id = id;
         this.name = name;
         this.isActive = isActive;
@@ -33,11 +33,11 @@ public class OrganizationFilterOutDto {
         this.name = name;
     }
 
-    public boolean isActive() {
+    public Boolean isActive() {
         return isActive;
     }
 
-    public void setActive(boolean active) {
+    public void setActive(Boolean active) {
         isActive = active;
     }
 }

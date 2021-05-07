@@ -23,13 +23,13 @@ public class Office {
     private Long phone;
 
     @Column(name = "is_active")
-    private boolean isActive;
+    private Boolean isActive;
 
     @ManyToOne
     @JoinColumn(name = "org_id")
     private Organization organization;
 
-    public Office(int id ,String name, String address, Long phone, boolean isActive, Organization organization) {
+    public Office(int id ,String name, String address, Long phone, Boolean isActive, Organization organization) {
         this.id = id;
         this.name = name;
         this.address = address;
@@ -73,11 +73,11 @@ public class Office {
         this.phone = phone;
     }
 
-    public boolean isActive() {
+    public Boolean isActive() {
         return isActive;
     }
 
-    public void setActive(boolean active) {
+    public void setActive(Boolean active) {
         isActive = active;
     }
 

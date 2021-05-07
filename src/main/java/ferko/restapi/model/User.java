@@ -30,7 +30,7 @@ public class User {
     private Long phone;
 
     @Column(name = "is_identified")
-    private boolean isIdentified;
+    private Boolean isIdentified;
 
     @ManyToOne
     @JoinColumn(name = "office_id")
@@ -44,7 +44,7 @@ public class User {
     private Document document;
 
 
-    public User(int id, String firstName, String secondName, String middleName, String position, Long phone, boolean isIdentified, Office office, Country country, Document document) {
+    public User(int id, String firstName, String secondName, String middleName, String position, Long phone, Boolean isIdentified, Office office, Country country, Document document) {
         this.id = id;
         this.firstName = firstName;
         this.secondName = secondName;
@@ -104,11 +104,11 @@ public class User {
         this.phone = phone;
     }
 
-    public boolean isIdentified() {
+    public Boolean isIdentified() {
         return isIdentified;
     }
 
-    public void setIdentified(boolean identified) {
+    public void setIdentified(Boolean identified) {
         isIdentified = identified;
     }
 

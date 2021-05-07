@@ -2,15 +2,16 @@ package ferko.restapi.service.user;
 
 import ferko.restapi.dto.user.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 public interface UserService {
 
     UserGetDto findById(int id);
 
-    void save(UserSaveDto userSaveDTO);
+    void save(@Valid UserSaveDto userSaveDTO);
 
-    void update(UserUpdateDto userUpdateDTO);
+    void update(@Valid UserUpdateDto userUpdateDTO);
 
-    List<UserFilterOutDto> filter(UserFilterInDto userFilterInDTO);
+    List<UserFilterOutDto> filter(@Valid UserFilterInDto userFilterInDTO);
 }

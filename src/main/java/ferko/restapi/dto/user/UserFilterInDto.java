@@ -1,7 +1,10 @@
 package ferko.restapi.dto.user;
 
+import javax.validation.constraints.NotNull;
+
 public class UserFilterInDto {
 
+    @NotNull
     private int officeId;
 
     private String firstName;
