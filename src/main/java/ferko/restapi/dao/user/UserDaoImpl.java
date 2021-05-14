@@ -45,43 +45,43 @@ public class UserDaoImpl implements UserDao{
     }
 
     @Override
-    public List<User> filter(User user, int docCode) {
+    public List<User> filter(ferko.restapi.dto.user.UserFilterInDto user) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<User> orgCriteria = cb.createQuery(User.class);
         Root<User> orgRoot = orgCriteria.from(User.class);
         orgCriteria.select(orgRoot);
 
         if (user.getFirstName() != null && user.getSecondName() != null && user.getMiddleName() != null
-                && user.getPosition() != null && docCode != 0 && user.getCountry() != null) {
-            orgCriteria.where(cb.and(cb.equal(orgRoot.get("office"), user.getOffice()),
+                && user.getPosition() != null && user.getDocCode() != 0 && user.getCitizenshipCode() != 0) {
+            orgCriteria.where(cb.and(cb.equal(orgRoot.get("office").get("id"), user.getOfficeId()),
                     cb.equal(orgRoot.get("firstName"), user.getFirstName()),
                     cb.equal(orgRoot.get("secondName"), user.getSecondName()),
                     cb.equal(orgRoot.get("middleName"), user.getMiddleName()),
                     cb.equal(orgRoot.get("position"), user.getPosition()),
-                    cb.equal(orgRoot.get("document").get("doc").get("docCode"), docCode),
-                    cb.equal(orgRoot.get("country"), user.getCountry())));
+                    cb.equal(orgRoot.get("document").get("doc").get("docCode"), user.getDocCode()),
+                    cb.equal(orgRoot.get("country").get("countryCode"), user.getCitizenshipCode())));
         }
         else if (user.getFirstName() != null && user.getSecondName() != null && user.getMiddleName() != null
-                && user.getPosition() != null && docCode != 0) {
-            orgCriteria.where(cb.and(cb.equal(orgRoot.get("office"), user.getOffice()),
+                && user.getPosition() != null && user.getDocCode() != 0) {
+            orgCriteria.where(cb.and(cb.equal(orgRoot.get("office").get("id"), user.getOfficeId()),
                     cb.equal(orgRoot.get("firstName"), user.getFirstName()),
                     cb.equal(orgRoot.get("secondName"), user.getSecondName()),
                     cb.equal(orgRoot.get("middleName"), user.getMiddleName()),
                     cb.equal(orgRoot.get("position"), user.getPosition()),
-                    cb.equal(orgRoot.get("document").get("doc").get("docCode"), docCode)));
+                    cb.equal(orgRoot.get("document").get("doc").get("docCode"), user.getDocCode())));
         }
         else if (user.getFirstName() != null && user.getSecondName() != null && user.getMiddleName() != null
-                && user.getPosition() != null && user.getCountry() != null) {
-            orgCriteria.where(cb.and(cb.equal(orgRoot.get("office"), user.getOffice()),
+                && user.getPosition() != null && user.getCitizenshipCode() != 0) {
+            orgCriteria.where(cb.and(cb.equal(orgRoot.get("office").get("id"), user.getOfficeId()),
                     cb.equal(orgRoot.get("firstName"), user.getFirstName()),
                     cb.equal(orgRoot.get("secondName"), user.getSecondName()),
                     cb.equal(orgRoot.get("middleName"), user.getMiddleName()),
                     cb.equal(orgRoot.get("position"), user.getPosition()),
-                    cb.equal(orgRoot.get("country"), user.getCountry())));
+                    cb.equal(orgRoot.get("country").get("countryCode"), user.getCitizenshipCode())));
         }
         else if (user.getFirstName() == null && user.getSecondName() == null && user.getMiddleName() == null
-                && user.getPosition() == null && docCode == 0 && user.getCountry() == null) {
-            orgCriteria.where(cb.equal(orgRoot.get("office"), user.getOffice()));}
+                && user.getPosition() == null && user.getDocCode() == 0 && user.getCitizenshipCode() == 0) {
+            orgCriteria.where(cb.equal(orgRoot.get("office").get("id"), user.getOfficeId()));}
 
         return em.createQuery(orgCriteria).getResultList();
     }

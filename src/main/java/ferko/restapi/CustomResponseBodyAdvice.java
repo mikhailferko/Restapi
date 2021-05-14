@@ -13,7 +13,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 @ControllerAdvice
 public class CustomResponseBodyAdvice implements ResponseBodyAdvice {
 
-    //ResultDto resultDto;
+
     @Override
     public boolean supports(MethodParameter methodParameter, Class aClass) {
         return true;
@@ -21,8 +21,7 @@ public class CustomResponseBodyAdvice implements ResponseBodyAdvice {
 
     @Override
     public Object beforeBodyWrite(Object o, MethodParameter methodParameter, MediaType mediaType, Class aClass, ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse) {
-        Data data;
-        ResultDto resultDto;
+
         if (o == null) {
             return new Data(new ResultDto());
         }

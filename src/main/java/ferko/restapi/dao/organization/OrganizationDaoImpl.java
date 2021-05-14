@@ -1,6 +1,7 @@
 package ferko.restapi.dao.organization;
 
 
+import ferko.restapi.dto.organization.OrganizationFilterInDto;
 import ferko.restapi.model.Organization;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -46,7 +47,7 @@ public class OrganizationDaoImpl implements OrganizationDao {
 
 
     @Override
-    public List<Organization> filter(Organization organization) {
+    public List<Organization> filter(OrganizationFilterInDto organization) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Organization> orgCriteria = cb.createQuery(Organization.class);
         Root<Organization> orgRoot = orgCriteria.from(Organization.class);

@@ -11,11 +11,11 @@ public class OfficeSaveDto {
 
     private String address;
 
-    private Long phone;
+    private String phone;
 
     private Boolean isActive;
 
-    public OfficeSaveDto(int orgId, String name, String address, Long phone, Boolean isActive) {
+    public OfficeSaveDto(int orgId, String name, String address, String phone, Boolean isActive) {
         this.orgId = orgId;
         this.name = name;
         this.address = address;
@@ -50,11 +50,11 @@ public class OfficeSaveDto {
         this.address = address;
     }
 
-    public Long getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(Long phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 

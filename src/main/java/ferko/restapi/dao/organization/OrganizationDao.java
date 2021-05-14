@@ -1,5 +1,6 @@
 package ferko.restapi.dao.organization;
 
+import ferko.restapi.dto.organization.OrganizationFilterInDto;
 import ferko.restapi.model.Organization;
 
 import java.util.List;
@@ -12,5 +13,5 @@ public interface OrganizationDao {
 
     void update(Organization organization, int id);
 
-    List<Organization> filter(Organization organization);
+    List<Organization> filter(OrganizationFilterInDto organizationFilterInDto);
 }

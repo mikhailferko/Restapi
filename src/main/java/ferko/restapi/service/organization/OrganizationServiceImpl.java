@@ -50,8 +50,8 @@ public class OrganizationServiceImpl implements OrganizationService{
     @Transactional
     @Override
     public List<OrganizationFilterOutDto> filter(OrganizationFilterInDto organizationFilterDTO) {
-        Organization organization = mapperFacade.map(organizationFilterDTO, Organization.class);
-        List<Organization> list = organizationDao.filter(organization);
+        //Organization organization = mapperFacade.map(organizationFilterDTO, Organization.class);
+        List<Organization> list = organizationDao.filter(organizationFilterDTO);
         return mapperFacade.mapAsList(list, OrganizationFilterOutDto.class);
     }
 }

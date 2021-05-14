@@ -12,5 +12,5 @@ public interface UserDao {
 
     void update(User user, int id);
 
-    List<User> filter(User user, int docCode);
+    List<User> filter(ferko.restapi.dto.user.UserFilterInDto user);
 }

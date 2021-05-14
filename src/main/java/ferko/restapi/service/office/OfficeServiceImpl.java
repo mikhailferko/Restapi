@@ -53,9 +53,8 @@ public class OfficeServiceImpl implements OfficeService{
     @Transactional
     @Override
     public List<OfficeFilterOutDto> filter(OfficeFilterInDto officeFilterInDTO) {
-        Office office = mapperFacade.map(officeFilterInDTO, Office.class);
-        office.setOrganization(organizationDao.findById(officeFilterInDTO.getOrgId()));
-        List<Office> list = officeDao.filter(office);
+        //office.setOrganization(organizationDao.findById(officeFilterInDTO.getOrgId()));
+        List<Office> list = officeDao.filter(officeFilterInDTO);
         return mapperFacade.mapAsList(list, OfficeFilterOutDto.class);
     }
 }

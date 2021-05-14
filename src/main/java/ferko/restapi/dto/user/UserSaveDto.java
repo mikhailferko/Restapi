@@ -22,7 +22,7 @@ public class UserSaveDto {
     @NotBlank
     private String position;
 
-    private Long phone;
+    private String phone;
 
     private int docCode;
 
@@ -37,7 +37,7 @@ public class UserSaveDto {
     private Boolean isIdentified;
 
 
-    public UserSaveDto(int officeId, String firstName, String secondName, String middleName, String position, Long phone, int docCode, String docName, Long docNumber, Date docDate, int citizenshipCode, Boolean isIdentified) {
+    public UserSaveDto(int officeId, String firstName, String secondName, String middleName, String position, String phone, int docCode, String docName, Long docNumber, Date docDate, int citizenshipCode, Boolean isIdentified) {
         this.officeId = officeId;
         this.firstName = firstName;
         this.secondName = secondName;
@@ -95,11 +95,11 @@ public class UserSaveDto {
         this.position = position;
     }
 
-    public Long getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(Long phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
