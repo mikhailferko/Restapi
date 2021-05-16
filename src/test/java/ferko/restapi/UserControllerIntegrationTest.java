@@ -31,7 +31,7 @@ public class UserControllerIntegrationTest {
 
     @Test
     public void saveUserTest() throws Exception {
-        UserSaveDto userSaveDto = new UserSaveDto(1, "Иван", "Иванов", "Иваныч", "Директор", "1234566", 21, "Паспорт", 12345L, null, 611, null);
+        UserSaveDto userSaveDto = new UserSaveDto(1, "Иван", "Иванов", "Иванович", "Директор", "1234566", 21, "Паспорт гражданина РФ", 12345L, null, 112, null);
         ResponseEntity<Data> response = restTemplate.postForEntity("/user/save", userSaveDto, Data.class);
         assertThat(response.getStatusCode(), is(HttpStatus.OK));
         assertThat(response.getBody().getClass(), is(Data.class));
@@ -63,7 +63,7 @@ public class UserControllerIntegrationTest {
 
     @Test
     public void listUserTest() throws Exception {
-        UserFilterInDto userFilterInDto = new UserFilterInDto(1, "Иван", "Иванов", "Иванович", "qwertr", 21, 611);
+        UserFilterInDto userFilterInDto = new UserFilterInDto(2, "Иван", "Иванов", "Иванович", "Директор", 21, 112);
         HttpHeaders headers = new HttpHeaders();
         HttpEntity<UserFilterInDto> entity = new HttpEntity<UserFilterInDto>(userFilterInDto, headers);
         ResponseEntity<DataDto<List<UserFilterOutDto>>> response1 = restTemplate.exchange("/user/list",
@@ -73,9 +73,8 @@ public class UserControllerIntegrationTest {
         ResponseEntity<Data> response = restTemplate.postForEntity("/user/list", userFilterInDto, Data.class);
         assertThat(response.getStatusCode(), is(HttpStatus.OK));
         assertThat(response.getBody().getClass(), is(Data.class));
-        //if (data)
-        assertThat(data.getData().get(0).getFirstName(), notNullValue());
-        assertThat(data.getData().get(0).getId(), notNullValue());
+            assertThat(data.getData().get(0).getFirstName(), notNullValue());
+            assertThat(data.getData().get(0).getId(), notNullValue());
 
     }
 }
