@@ -5,14 +5,9 @@ import ferko.restapi.dao.doc.DocRepository;
 import ferko.restapi.dao.document.DocumentDao;
 import ferko.restapi.dao.office.OfficeDao;
 import ferko.restapi.dao.user.UserDao;
-import ferko.restapi.dto.office.OfficeFilterOutDto;
 import ferko.restapi.dto.user.*;
 import ferko.restapi.mapper.MapperFacade;
-import ferko.restapi.model.Document;
-import ferko.restapi.model.Office;
 import ferko.restapi.model.User;
-import ma.glasnost.orika.MapperFactory;
-import ma.glasnost.orika.impl.DefaultMapperFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -78,7 +73,6 @@ public class UserServiceImpl implements UserService{
     @Override
     public List<UserFilterOutDto> filter(UserFilterInDto userFilterInDTO) {
         List<User> list = userDao.filter(userFilterInDTO);
-
         return mapperFacade.mapAsList(list, UserFilterOutDto.class);
     }
 }

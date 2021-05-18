@@ -1,14 +1,20 @@
 package ferko.restapi.dto.office;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 public class OfficeSaveDto {
 
     @NotNull
     private int orgId;
 
+    @Size(max = 30)
+    @NotBlank
     private String name;
 
+    @Size(max = 100)
+    @NotBlank
     private String address;
 
     private String phone;

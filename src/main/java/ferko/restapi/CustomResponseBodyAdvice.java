@@ -10,6 +10,9 @@ import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+
 @ControllerAdvice
 public class CustomResponseBodyAdvice implements ResponseBodyAdvice {
 
@@ -21,6 +24,7 @@ public class CustomResponseBodyAdvice implements ResponseBodyAdvice {
 
     @Override
     public Object beforeBodyWrite(Object o, MethodParameter methodParameter, MediaType mediaType, Class aClass, ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse) {
+
 
         if (o == null) {
             return new Data(new ResultDto());

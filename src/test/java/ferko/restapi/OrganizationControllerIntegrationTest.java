@@ -34,20 +34,17 @@ public class OrganizationControllerIntegrationTest {
         OrganizationSaveDto organizationSaveDto = new OrganizationSaveDto("Qwer", "asdf", "1234", "2345", "lkjh", null, null);
         ResponseEntity<Data> response = restTemplate.postForEntity("/organization/save", organizationSaveDto, Data.class);
         assertThat(response.getStatusCode(), is(HttpStatus.OK));
-        assertThat(response.getBody().getClass(), is(Data.class));
         assertThat(response.getBody().getData().toString(), is("{result=success}"));
     }
 
     @Test
     public void getOrganizationTest() throws Exception {
         int id = 1;
-        ResponseEntity<DataDto<OrganizationUpdateAndGetDto>> response1 = restTemplate.exchange("/organization/1",
+        ResponseEntity<DataDto<OrganizationUpdateAndGetDto>> response = restTemplate.exchange("/organization/1",
                 HttpMethod.GET, null, new ParameterizedTypeReference<DataDto<OrganizationUpdateAndGetDto>>() {
                 });
-                DataDto<OrganizationUpdateAndGetDto> data = response1.getBody();
-        ResponseEntity<Data> response = restTemplate.getForEntity("/organization/{id}", Data.class, id);
+                DataDto<OrganizationUpdateAndGetDto> data = response.getBody();
         assertThat(response.getStatusCode(), is(HttpStatus.OK));
-        assertThat(response.getBody().getClass(), is(Data.class));
         assertThat(data.getData().getName(), notNullValue());
         assertThat(data.getData().getFullName(), notNullValue());
     }
@@ -57,7 +54,6 @@ public class OrganizationControllerIntegrationTest {
         OrganizationUpdateAndGetDto organizationUpdateAndGetDto = new OrganizationUpdateAndGetDto(1, "Qwer", "asdf", "1234", "2345", "lkjh", null, null);
         ResponseEntity<Data> response = restTemplate.postForEntity("/organization/update", organizationUpdateAndGetDto, Data.class);
         assertThat(response.getStatusCode(), is(HttpStatus.OK));
-        assertThat(response.getBody().getClass(), is(Data.class));
         assertThat(response.getBody().getData().toString(), is("{result=success}"));
     }
 
@@ -70,9 +66,7 @@ public class OrganizationControllerIntegrationTest {
                 HttpMethod.POST, entity, new ParameterizedTypeReference<DataDto<List<OrganizationFilterOutDto>>>() {
                 });
         DataDto<List<OrganizationFilterOutDto>> data = response1.getBody();
-        ResponseEntity<Data> response = restTemplate.postForEntity("/organization/list", organizationFilterInDto, Data.class);
-        assertThat(response.getStatusCode(), is(HttpStatus.OK));
-        assertThat(response.getBody().getClass(), is(Data.class));
+        assertThat(response1.getStatusCode(), is(HttpStatus.OK));
         assertThat(data.getData().get(0).getName(), notNullValue());
         assertThat(data.getData().get(0).getId(), notNullValue());
 

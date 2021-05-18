@@ -12,9 +12,9 @@ public interface OrganizationService {
 
     OrganizationUpdateAndGetDto findById(int id);
 
-    void save(@Valid OrganizationSaveDto organizationSaveDTO);
+    void save(OrganizationSaveDto organizationSaveDTO);
 
-    void update(@Valid OrganizationUpdateAndGetDto organizationUpdateDTO);
+    void update(OrganizationUpdateAndGetDto organizationUpdateDTO);
 
-    List<OrganizationFilterOutDto> filter(@Valid OrganizationFilterInDto organizationFilterDTO);
+    List<OrganizationFilterOutDto> filter(OrganizationFilterInDto organizationFilterDTO);
 }

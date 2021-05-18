@@ -12,9 +12,9 @@ public interface OfficeService {
 
     OfficeUpdateAndGetDto findById(int id);
 
-    void save(@Valid OfficeSaveDto officeSaveDTO);
+    void save(OfficeSaveDto officeSaveDTO);
 
-    void update(@Valid OfficeUpdateAndGetDto officeUpdateAndGetDTO);
+    void update(OfficeUpdateAndGetDto officeUpdateAndGetDTO);
 
-    List<OfficeFilterOutDto> filter(@Valid OfficeFilterInDto officeFilterInDTO);
+    List<OfficeFilterOutDto> filter(OfficeFilterInDto officeFilterInDTO);
 }

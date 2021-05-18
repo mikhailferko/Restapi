@@ -8,7 +8,6 @@ import ferko.restapi.dto.office.OfficeSaveDto;
 import ferko.restapi.dto.office.OfficeUpdateAndGetDto;
 import ferko.restapi.mapper.MapperFacade;
 import ferko.restapi.model.Office;
-import ferko.restapi.model.Organization;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -53,7 +52,6 @@ public class OfficeServiceImpl implements OfficeService{
     @Transactional
     @Override
     public List<OfficeFilterOutDto> filter(OfficeFilterInDto officeFilterInDTO) {
-        //office.setOrganization(organizationDao.findById(officeFilterInDTO.getOrgId()));
         List<Office> list = officeDao.filter(officeFilterInDTO);
         return mapperFacade.mapAsList(list, OfficeFilterOutDto.class);
     }
