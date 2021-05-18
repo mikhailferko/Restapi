@@ -30,7 +30,7 @@ public class UserController {
         if(userService.findById(id) != null){
             return userService.findById(id);
         }
-        else throw new NotFoundException();
+        else throw new NotFoundException("Не найден пользователь с id = " + id);
     }
 
     @PostMapping("save")

@@ -33,7 +33,7 @@ public class OrganizationController {
         if(organizationService.findById(id) != null){
         return organizationService.findById(id);
             }
-        else throw new NotFoundException();
+        else throw new NotFoundException("Не найдена организация с id = " + id);
     }
 
     @PostMapping("save")

@@ -36,10 +36,4 @@ public class CustomMapperFactory implements FactoryBean<MapperFactory> {
         return DefaultMapperFactory.class;
     }
 
-
-
-
-
-
-
 }

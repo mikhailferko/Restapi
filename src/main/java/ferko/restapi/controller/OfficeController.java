@@ -33,7 +33,7 @@ public class OfficeController {
         if(officeService.findById(id) != null){
             return officeService.findById(id);
         }
-        else throw new NotFoundException();
+        else throw new NotFoundException("Не найден офис с id = " + id);
     }
 
     @PostMapping("save")
