@@ -8,12 +8,13 @@ import ferko.restapi.dao.user.UserDao;
 import ferko.restapi.dto.user.*;
 import ferko.restapi.exception.NotFoundException;
 import ferko.restapi.mapper.MapperFacade;
-import ferko.restapi.model.User;
+import ferko.restapi.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService{
@@ -52,28 +53,35 @@ public class UserServiceImpl implements UserService{
     @Override
     public void save(UserSaveDto userSaveDTO) {
         User user = mapperFacade.map(userSaveDTO, User.class);
-        if (officeDao.findById(userSaveDTO.getOfficeId()) != null) {
-            user.setOffice(officeDao.findById(userSaveDTO.getOfficeId()));
+        Office office = officeDao.findById(userSaveDTO.getOfficeId());
+        if (office != null) {
+            user.setOffice(office);
         }
         else {
             throw new NotFoundException("Офиса с id = " + userSaveDTO.getOfficeId() + " не существует");
         }
         if (userSaveDTO.getCitizenshipCode() != 0) {
-            if (countryRepository.findByCountryCode(userSaveDTO.getCitizenshipCode()).isPresent()) {
-                user.setCountry(countryRepository.findByCountryCode(userSaveDTO.getCitizenshipCode()).get());
+            Optional<Country> country = countryRepository.findByCountryCode(userSaveDTO.getCitizenshipCode());
+            if (country.isPresent()) {
+                user.setCountry(country.get());
             } else {
                 throw new NotFoundException("Страны с кодом " + userSaveDTO.getCitizenshipCode() + " не существует");
             }
         }
-        if (user.getDocument() != null) {
-            user.getDocument().setUser(user);
+        Document document = user.getDocument();
+        if (document != null) {
+            document.setUser(user);
         }
         userDao.save(user);
-        if (userSaveDTO.getDocCode() != 0 && user.getDocument() != null) {
-            if (docRepository.findByDocCode(userSaveDTO.getDocCode()).isPresent()) {
-                user.getDocument().setDoc(docRepository.findByDocCode(userSaveDTO.getDocCode()).get());
+
+        int docCode = userSaveDTO.getDocCode();
+
+        if (docCode != 0 && document != null) {
+            Optional<Doc> doc = docRepository.findByDocCode(docCode);
+            if (doc.isPresent()) {
+                document.setDoc(doc.get());
             } else {
-                throw new NotFoundException("Документа с кодом " + userSaveDTO.getDocCode() + " не существует");
+                throw new NotFoundException("Документа с кодом " + docCode + " не существует");
             }
         }
     }
@@ -81,34 +89,37 @@ public class UserServiceImpl implements UserService{
     @Transactional
     @Override
     public void update(UserUpdateDto userUpdateDTO) {
-        User user;
-        if (userDao.findById(userUpdateDTO.getId()) != null) {
-            user = userDao.findById(userUpdateDTO.getId());
-        }
-        else {
+        User user = userDao.findById(userUpdateDTO.getId());
+        if (user == null) {
             throw new NotFoundException("Пользователя с id = " + userUpdateDTO.getId() + " не существует");
         }
         mapperFacade.map(userUpdateDTO, user);
-        if (officeDao.findById(userUpdateDTO.getOfficeId()) != null) {
-            user.setOffice(officeDao.findById(userUpdateDTO.getOfficeId()));
+        Office office = officeDao.findById(userUpdateDTO.getOfficeId());
+        if (office != null) {
+            user.setOffice(office);
         }
         else {
             throw new NotFoundException("Офиса с id = " + userUpdateDTO.getOfficeId() + " не существует");
         }
-        if (userUpdateDTO.getDocName() != null && user.getDocument() != null) {
-            if (docRepository.findByDocName(userUpdateDTO.getDocName()).isPresent()) {
-                user.getDocument().setDoc(docRepository.findByDocName(userUpdateDTO.getDocName()).get());
+        String docName = userUpdateDTO.getDocName();
+        Document document = user.getDocument();
+        if (docName != null && document != null) {
+            Optional<Doc> doc = docRepository.findByDocName(docName);
+            if (doc.isPresent()) {
+                document.setDoc(doc.get());
             }
             else {
-                throw new NotFoundException("Документа с названием " + userUpdateDTO.getDocName() + " не существует");
+                throw new NotFoundException("Документа с названием " + docName + " не существует");
             }
         }
-        if (userUpdateDTO.getCitizenshipCode() != 0) {
-            if (countryRepository.findByCountryCode(userUpdateDTO.getCitizenshipCode()).isPresent()) {
-                user.setCountry(countryRepository.findByCountryCode(userUpdateDTO.getCitizenshipCode()).get());
+        int citizenshipCode = userUpdateDTO.getCitizenshipCode();
+        if (citizenshipCode != 0) {
+            Optional<Country> country = countryRepository.findByCountryCode(citizenshipCode);
+            if (country.isPresent()) {
+                user.setCountry(country.get());
             }
             else {
-                throw new NotFoundException("Страны с кодом " + userUpdateDTO.getCitizenshipCode() + " не существует");
+                throw new NotFoundException("Страны с кодом " + citizenshipCode + " не существует");
             }
         }
         userDao.update(user, userUpdateDTO.getId());

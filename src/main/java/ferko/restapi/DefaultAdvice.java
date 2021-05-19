@@ -2,7 +2,7 @@ package ferko.restapi;
 
 import ferko.restapi.dto.ResponseDto;
 import ferko.restapi.exception.NotFoundException;
-import org.apache.logging.log4j.LogManager;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,13 +12,13 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
 import java.util.UUID;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+
 
 @ControllerAdvice
 public class DefaultAdvice {
 
-    static  org.slf4j.Logger log = LoggerFactory.getLogger(DefaultAdvice.class);
+    static private Logger log = LoggerFactory.getLogger(DefaultAdvice.class);
 
 
     @ExceptionHandler(Exception.class)

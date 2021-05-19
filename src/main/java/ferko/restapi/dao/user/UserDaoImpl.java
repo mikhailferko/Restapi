@@ -1,15 +1,15 @@
 package ferko.restapi.dao.user;
 
-import ferko.restapi.model.Doc;
-import ferko.restapi.model.Document;
-import ferko.restapi.model.Organization;
+
 import ferko.restapi.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.*;
+import java.util.ArrayList;
 import java.util.List;
+
 
 @Repository
 public class UserDaoImpl implements UserDao{
@@ -46,42 +46,46 @@ public class UserDaoImpl implements UserDao{
 
     @Override
     public List<User> filter(ferko.restapi.dto.user.UserFilterInDto user) {
+
+        Predicate predicate;
+        List<Predicate> list = new ArrayList<>();
+
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<User> orgCriteria = cb.createQuery(User.class);
         Root<User> orgRoot = orgCriteria.from(User.class);
         orgCriteria.select(orgRoot);
 
-        if (user.getFirstName() != null && user.getSecondName() != null && user.getMiddleName() != null
-                && user.getPosition() != null && user.getDocCode() != 0 && user.getCitizenshipCode() != 0) {
-            orgCriteria.where(cb.and(cb.equal(orgRoot.get("office").get("id"), user.getOfficeId()),
-                    cb.equal(orgRoot.get("firstName"), user.getFirstName()),
-                    cb.equal(orgRoot.get("secondName"), user.getSecondName()),
-                    cb.equal(orgRoot.get("middleName"), user.getMiddleName()),
-                    cb.equal(orgRoot.get("position"), user.getPosition()),
-                    cb.equal(orgRoot.get("document").get("doc").get("docCode"), user.getDocCode()),
-                    cb.equal(orgRoot.get("country").get("countryCode"), user.getCitizenshipCode())));
+        predicate = cb.equal(orgRoot.get("office").get("id"), user.getOfficeId());
+        list.add(predicate);
+
+        if (user.getFirstName() != null){
+            predicate = cb.equal(orgRoot.get("firstName"), user.getFirstName());
+            list.add(predicate);
         }
-        else if (user.getFirstName() != null && user.getSecondName() != null && user.getMiddleName() != null
-                && user.getPosition() != null && user.getDocCode() != 0) {
-            orgCriteria.where(cb.and(cb.equal(orgRoot.get("office").get("id"), user.getOfficeId()),
-                    cb.equal(orgRoot.get("firstName"), user.getFirstName()),
-                    cb.equal(orgRoot.get("secondName"), user.getSecondName()),
-                    cb.equal(orgRoot.get("middleName"), user.getMiddleName()),
-                    cb.equal(orgRoot.get("position"), user.getPosition()),
-                    cb.equal(orgRoot.get("document").get("doc").get("docCode"), user.getDocCode())));
+        if (user.getSecondName() != null){
+            predicate = cb.equal(orgRoot.get("secondName"), user.getSecondName());
+            list.add(predicate);
         }
-        else if (user.getFirstName() != null && user.getSecondName() != null && user.getMiddleName() != null
-                && user.getPosition() != null && user.getCitizenshipCode() != 0) {
-            orgCriteria.where(cb.and(cb.equal(orgRoot.get("office").get("id"), user.getOfficeId()),
-                    cb.equal(orgRoot.get("firstName"), user.getFirstName()),
-                    cb.equal(orgRoot.get("secondName"), user.getSecondName()),
-                    cb.equal(orgRoot.get("middleName"), user.getMiddleName()),
-                    cb.equal(orgRoot.get("position"), user.getPosition()),
-                    cb.equal(orgRoot.get("country").get("countryCode"), user.getCitizenshipCode())));
+        if (user.getMiddleName() != null){
+            predicate = cb.equal(orgRoot.get("middleName"), user.getMiddleName());
+            list.add(predicate);
         }
-        else if (user.getFirstName() == null && user.getSecondName() == null && user.getMiddleName() == null
-                && user.getPosition() == null && user.getDocCode() == 0 && user.getCitizenshipCode() == 0) {
-            orgCriteria.where(cb.equal(orgRoot.get("office").get("id"), user.getOfficeId()));}
+        if (user.getPosition() != null){
+            predicate = cb.equal(orgRoot.get("position"), user.getPosition());
+            list.add(predicate);
+        }
+        if (user.getDocCode() != 0){
+            predicate = cb.equal(orgRoot.get("document").get("doc").get("docCode"), user.getDocCode());
+            list.add(predicate);
+        }
+        if (user.getCitizenshipCode() != 0){
+            predicate =  cb.equal(orgRoot.get("country").get("countryCode"), user.getCitizenshipCode());
+            list.add(predicate);
+        }
+
+        Predicate[] pr = new Predicate[list.size()];
+        list.toArray(pr);
+        orgCriteria.where(cb.and(pr));
 
         return em.createQuery(orgCriteria).getResultList();
     }
