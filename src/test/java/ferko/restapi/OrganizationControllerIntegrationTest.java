@@ -51,7 +51,7 @@ public class OrganizationControllerIntegrationTest {
 
     @Test
     public void updateOrganizationTest() throws Exception {
-        OrganizationUpdateAndGetDto organizationUpdateAndGetDto = new OrganizationUpdateAndGetDto(1, "Qwer", "asdf", "1234", "2345", "lkjh", null, null);
+        OrganizationUpdateAndGetDto organizationUpdateAndGetDto = new OrganizationUpdateAndGetDto(1, "Ромашка", "asdf", "1234", "2345", "lkjh", null, null);
         ResponseEntity<Data> response = restTemplate.postForEntity("/organization/update", organizationUpdateAndGetDto, Data.class);
         assertThat(response.getStatusCode(), is(HttpStatus.OK));
         assertThat(response.getBody().getData().toString(), is("{result=success}"));

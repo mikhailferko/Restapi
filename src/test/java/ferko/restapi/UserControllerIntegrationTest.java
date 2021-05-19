@@ -47,7 +47,7 @@ public class UserControllerIntegrationTest {
 
     @Test
     public void updateUserTest() throws Exception {
-        UserUpdateDto userUpdateDto = new UserUpdateDto(1, 2, "Иван", "Иванов", "Иванович", "директор", "89789999999", "Паспорт гражданина РФ", 12345L, null, 112, null);
+        UserUpdateDto userUpdateDto = new UserUpdateDto(1, 2, "Иван", "Иванов", "Иванович", "Директор", "89789999999", "Паспорт гражданина РФ", 12345L, null, 112, null);
         ResponseEntity<Data> response = restTemplate.postForEntity("/user/update", userUpdateDto, Data.class);
         assertThat(response.getStatusCode(), is(HttpStatus.OK));
         assertThat(response.getBody().getData().toString(), is("{result=success}"));
