@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService{
@@ -53,22 +52,27 @@ public class UserServiceImpl implements UserService{
     @Override
     public void save(UserSaveDto userSaveDTO) {
         User user = mapperFacade.map(userSaveDTO, User.class);
-        Office office = officeDao.findById(userSaveDTO.getOfficeId());
+
+        int officeId = userSaveDTO.getOfficeId();
+        Office office = officeDao.findById(officeId);
+
         if (office != null) {
             user.setOffice(office);
         }
         else {
-            throw new NotFoundException("Офиса с id = " + userSaveDTO.getOfficeId() + " не существует");
+            throw new NotFoundException("Офиса с id = " + officeId + " не существует");
         }
-        if (userSaveDTO.getCitizenshipCode() != 0) {
-            Optional<Country> country = countryRepository.findByCountryCode(userSaveDTO.getCitizenshipCode());
-            if (country.isPresent()) {
-                user.setCountry(country.get());
-            } else {
-                throw new NotFoundException("Страны с кодом " + userSaveDTO.getCitizenshipCode() + " не существует");
-            }
+
+        int citizenshipCode = userSaveDTO.getCitizenshipCode();
+
+        if (citizenshipCode != 0) {
+            Country country = countryRepository.findByCountryCode(citizenshipCode)
+                    .orElseThrow(() -> new NotFoundException("Страны с кодом " + citizenshipCode + " не существует"));
+                user.setCountry(country);
         }
+
         Document document = user.getDocument();
+
         if (document != null) {
             document.setUser(user);
         }
@@ -77,12 +81,9 @@ public class UserServiceImpl implements UserService{
         int docCode = userSaveDTO.getDocCode();
 
         if (docCode != 0 && document != null) {
-            Optional<Doc> doc = docRepository.findByDocCode(docCode);
-            if (doc.isPresent()) {
-                document.setDoc(doc.get());
-            } else {
-                throw new NotFoundException("Документа с кодом " + docCode + " не существует");
-            }
+            Doc doc = docRepository.findByDocCode(docCode)
+                    .orElseThrow(() -> new NotFoundException("Документа с кодом " + docCode + " не существует"));
+                document.setDoc(doc);
         }
     }
 
@@ -94,33 +95,32 @@ public class UserServiceImpl implements UserService{
             throw new NotFoundException("Пользователя с id = " + userUpdateDTO.getId() + " не существует");
         }
         mapperFacade.map(userUpdateDTO, user);
-        Office office = officeDao.findById(userUpdateDTO.getOfficeId());
+
+        int officeId = userUpdateDTO.getOfficeId();
+        Office office = officeDao.findById(officeId);
+
         if (office != null) {
             user.setOffice(office);
         }
         else {
-            throw new NotFoundException("Офиса с id = " + userUpdateDTO.getOfficeId() + " не существует");
+            throw new NotFoundException("Офиса с id = " + officeId + " не существует");
         }
+
         String docName = userUpdateDTO.getDocName();
         Document document = user.getDocument();
+
         if (docName != null && document != null) {
-            Optional<Doc> doc = docRepository.findByDocName(docName);
-            if (doc.isPresent()) {
-                document.setDoc(doc.get());
-            }
-            else {
-                throw new NotFoundException("Документа с названием " + docName + " не существует");
-            }
+            Doc doc = docRepository.findByDocName(docName)
+                    .orElseThrow(() -> new NotFoundException("Документа с названием " + docName + " не существует"));
+                document.setDoc(doc);
         }
+
         int citizenshipCode = userUpdateDTO.getCitizenshipCode();
+
         if (citizenshipCode != 0) {
-            Optional<Country> country = countryRepository.findByCountryCode(citizenshipCode);
-            if (country.isPresent()) {
-                user.setCountry(country.get());
-            }
-            else {
-                throw new NotFoundException("Страны с кодом " + citizenshipCode + " не существует");
-            }
+            Country country = countryRepository.findByCountryCode(citizenshipCode)
+                    .orElseThrow(() -> new NotFoundException("Страны с кодом " + citizenshipCode + " не существует"));
+                user.setCountry(country);
         }
         userDao.update(user, userUpdateDTO.getId());
     }

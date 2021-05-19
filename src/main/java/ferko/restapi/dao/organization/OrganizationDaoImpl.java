@@ -9,7 +9,9 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -26,7 +28,6 @@ public class OrganizationDaoImpl implements OrganizationDao {
     public Organization findById(int id) {
         return em.find(Organization.class, id);
     }
-
 
     @Override
     public void save(Organization organization) {
@@ -45,29 +46,33 @@ public class OrganizationDaoImpl implements OrganizationDao {
         organizationFromDB.setKpp(organization.getKpp());
     }
 
-
     @Override
     public List<Organization> filter(OrganizationFilterInDto organization) {
+
+        Predicate predicate;
+        List<Predicate> list = new ArrayList<>();
+
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Organization> orgCriteria = cb.createQuery(Organization.class);
         Root<Organization> orgRoot = orgCriteria.from(Organization.class);
         orgCriteria.select(orgRoot);
-        if (organization.getInn() != null && organization.isActive() != null) {
-            orgCriteria.where(cb.and(cb.equal(orgRoot.get("name"), organization.getName()),
-                    cb.equal(orgRoot.get("inn"), organization.getInn()),
-                    cb.equal(orgRoot.get("isActive"), organization.isActive())));
+
+        predicate = cb.equal(orgRoot.get("name"), organization.getName());
+        list.add(predicate);
+
+        if (organization.getInn() != null) {
+            predicate = cb.equal(orgRoot.get("inn"), organization.getInn());
+            list.add(predicate);
         }
-        else if (organization.getInn() != null) {
-            orgCriteria.where(cb.and(cb.equal(orgRoot.get("name"), organization.getName()),
-                    cb.equal(orgRoot.get("inn"), organization.getInn())));
+        if (organization.isActive() != null) {
+            predicate = cb.equal(orgRoot.get("isActive"), organization.isActive());
+            list.add(predicate);
         }
-        else if (organization.isActive() != null) {
-            orgCriteria.where(cb.and(cb.equal(orgRoot.get("name"), organization.getName()),
-                    cb.equal(orgRoot.get("isActive"), organization.isActive())));
-        }
-        else {
-            orgCriteria.where(cb.and(cb.equal(orgRoot.get("name"), organization.getName())));
-        }
+
+        Predicate[] pr = new Predicate[list.size()];
+        list.toArray(pr);
+        orgCriteria.where(cb.and(pr));
+
         return em.createQuery(orgCriteria).getResultList();
     }
 }

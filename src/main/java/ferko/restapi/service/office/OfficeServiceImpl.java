@@ -9,6 +9,7 @@ import ferko.restapi.dto.office.OfficeUpdateAndGetDto;
 import ferko.restapi.exception.NotFoundException;
 import ferko.restapi.mapper.MapperFacade;
 import ferko.restapi.model.Office;
+import ferko.restapi.model.Organization;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -39,8 +40,9 @@ public class OfficeServiceImpl implements OfficeService{
     @Override
     public void save(OfficeSaveDto officeSaveDTO) {
         Office office = mapperFacade.map(officeSaveDTO, Office.class);
-        if (organizationDao.findById(officeSaveDTO.getOrgId()) != null) {
-            office.setOrganization(organizationDao.findById(officeSaveDTO.getOrgId()));
+        Organization organization = organizationDao.findById(officeSaveDTO.getOrgId());
+        if (organization != null) {
+            office.setOrganization(organization);
         }
         else {
             throw new NotFoundException("Организации с id = " + officeSaveDTO.getOrgId() + " не существует");

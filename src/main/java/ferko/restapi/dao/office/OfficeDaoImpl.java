@@ -2,14 +2,15 @@ package ferko.restapi.dao.office;
 
 import ferko.restapi.dto.office.OfficeFilterInDto;
 import ferko.restapi.model.Office;
-import ferko.restapi.model.Organization;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -24,46 +25,37 @@ public class OfficeDaoImpl implements OfficeDao{
 
     @Override
     public List<Office> filter(OfficeFilterInDto office) {
+
+        Predicate predicate;
+        List<Predicate> list = new ArrayList<>();
+
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Office> orgCriteria = cb.createQuery(Office.class);
         Root<Office> orgRoot = orgCriteria.from(Office.class);
         orgCriteria.select(orgRoot);
-        if (office.getName() != null && office.getPhone() != null && office.isActive() != null) {
-            orgCriteria.where(cb.and(cb.equal(orgRoot.get("organization").get("id"), office.getOrgId()),
-                    cb.equal(orgRoot.get("name"), office.getName()),
-                    cb.equal(orgRoot.get("phone"), office.getPhone()),
-                    cb.equal(orgRoot.get("isActive"), office.isActive())));
+
+        predicate = cb.equal(orgRoot.get("organization").get("id"), office.getOrgId());
+        list.add(predicate);
+
+        if(office.getName() != null) {
+            predicate = cb.equal(orgRoot.get("name"), office.getName());
+            list.add(predicate);
         }
-        else if (office.getName() != null && office.getPhone() != null) {
-            orgCriteria.where(cb.and(cb.equal(orgRoot.get("organization").get("id"), office.getOrgId()),
-                    cb.equal(orgRoot.get("name"), office.getName()),
-                    cb.equal(orgRoot.get("phone"), office.getPhone())));
+
+        if(office.getPhone() != null) {
+            predicate = cb.equal(orgRoot.get("phone"), office.getPhone());
+            list.add(predicate);
         }
-        else if (office.getName() != null && office.isActive() != null) {
-            orgCriteria.where(cb.and(cb.equal(orgRoot.get("organization").get("id"), office.getOrgId()),
-                    cb.equal(orgRoot.get("name"), office.getName()),
-                    cb.equal(orgRoot.get("isActive"), office.isActive())));
+
+        if(office.isActive() != null) {
+            predicate = cb.equal(orgRoot.get("isActive"), office.isActive());
+            list.add(predicate);
         }
-        else if (office.getPhone() != null && office.isActive() != null) {
-            orgCriteria.where(cb.and(cb.equal(orgRoot.get("organization").get("id"), office.getOrgId()),
-                    cb.equal(orgRoot.get("phone"), office.getPhone()),
-                    cb.equal(orgRoot.get("isActive"), office.isActive())));
-        }
-        else if (office.getName() != null) {
-            orgCriteria.where(cb.and(cb.equal(orgRoot.get("organization").get("id"), office.getOrgId()),
-                    cb.equal(orgRoot.get("name"), office.getName())));
-        }
-        else if (office.getPhone() != null) {
-            orgCriteria.where(cb.and(cb.equal(orgRoot.get("organization").get("id"), office.getOrgId()),
-                    cb.equal(orgRoot.get("phone"), office.getPhone())));
-        }
-        else if (office.isActive() != null) {
-            orgCriteria.where(cb.and(cb.equal(orgRoot.get("organization").get("id"), office.getOrgId()),
-                    cb.equal(orgRoot.get("isActive"), office.isActive())));
-        }
-        else {
-            orgCriteria.where(cb.and(cb.equal(orgRoot.get("organization").get("id"), office.getOrgId())));
-        }
+
+        Predicate[] pr = new Predicate[list.size()];
+        list.toArray(pr);
+        orgCriteria.where(cb.and(pr));
+
         return em.createQuery(orgCriteria).getResultList();
     }
 
