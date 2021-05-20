@@ -34,7 +34,7 @@
 
     {
     
-        “data”:{
+        "data":{
         
         //то, что в параметре out
         
@@ -46,7 +46,7 @@
 
     {
     
-        “error”:”текст ошибки”
+        "error":"текст ошибки"
     
     }
 
@@ -58,11 +58,11 @@ __1. api/organization/list__
     
     {
     
-        “name”:””, //обязательный параметр
+        "name":"", //обязательный параметр
         
-        “inn”:””,
+        "inn":"",
         
-        “isActive”:””
+        "isActive":""
     
     }
     
@@ -72,11 +72,11 @@ __1. api/organization/list__
         
         {
         
-            “id”:””,
+            "id":"",
             
-            “name”:””,
+            "name":"",
             
-            “isActive”:”true”
+            "isActive":"true"
         
         },
         
@@ -93,21 +93,21 @@ method:GET
     
        {
     
-           “id”:””,
+           "id":"",
         
-           “name”:””,
+           "name":"",
         
-           “fullName”:””,
+           "fullName":"",
         
-           “inn”:””,
+           "inn":"",
         
-           “kpp”:””,
+           "kpp":"",
         
-           “address”:””,
+           "address":"",
         
-           “phone”,””,
+           "phone","",
         
-           “isActive”:”true”
+           "isActive":"true"
     
        }
 
@@ -117,21 +117,21 @@ __3. api/organization/update__
     
        {
     
-           “id”:””, //обязательный параметр
+           "id":"", //обязательный параметр
         
-           “name”:””, //обязательный параметр
+           "name":"", //обязательный параметр
         
-           “fullName”:””, //обязательный параметр
+           "fullName":"", //обязательный параметр
         
-           “inn”:””, //обязательный параметр
+           "inn":"", //обязательный параметр
         
-           “kpp”:””,  //обязательный параметр
+           "kpp":"",  //обязательный параметр
         
-           “address”:””, //обязательный параметр
+           "address":"", //обязательный параметр
         
-           “phone”,””,
+           "phone","",
         
-           “isActive”:”true”
+           "isActive":"true"
     
        }
     
@@ -139,7 +139,7 @@ __3. api/organization/update__
             
         {
             
-            “result”:”success”
+            "result":"success"
             
         }
 
@@ -149,19 +149,19 @@ __4. api/organization/save__
     
        {
     
-           “name”:””, //обязательный параметр
+           "name":"", //обязательный параметр
         
-           “fullName”:””, //обязательный параметр
+           "fullName":"", //обязательный параметр
         
-           “inn”:””, //обязательный параметр
+           "inn":"", //обязательный параметр
         
-           “kpp”:””, //обязательный параметр
+           "kpp":"", //обязательный параметр
         
-           “address”:””, //обязательный параметр
+           "address":"", //обязательный параметр
         
-           “phone”,””,
+           "phone","",
         
-           “isActive”:”true”
+           "isActive":"true"
     
        }
     
@@ -169,7 +169,7 @@ __4. api/organization/save__
             
         {
             
-            “result”:”success”
+            "result":"success"
             
         }
 
@@ -179,13 +179,13 @@ __5. api/office/list__
     
        {
     
-           “orgId”:””, //обязательный параметр
+           "orgId":"", //обязательный параметр
         
-           “name”:””,
+           "name":"",
         
-           “phone”:””,
+           "phone":"",
         
-           “isActive”
+           "isActive"
     
        }
     
@@ -195,11 +195,11 @@ __5. api/office/list__
             
         {
             
-            “id”:””,
+            "id":"",
             
-            “name”:””,
+            "name":"",
             
-            “isActive”:”true”
+            "isActive":"true"
             
         },
             
@@ -215,15 +215,15 @@ method:GET
     
        {
     
-           “id”:””,
+           "id":"",
         
-           “name”:””,
+           "name":"",
         
-           “address”:””,
+           "address":"",
         
-           “phone”,””,
+           "phone","",
         
-           “isActive”:”true”
+           "isActive":"true"
     
        }
 
@@ -233,15 +233,15 @@ __7. api/office/update__
     
        {
     
-           “id”:””, //обязательный параметр
+           "id":"", //обязательный параметр
         
-           “name”:””, //обязательный параметр
+           "name":"", //обязательный параметр
         
-           “address”:””, //обязательный параметр
+           "address":"", //обязательный параметр
         
-           “phone”,””,
+           "phone","",
         
-           “isActive”:”true” //пример
+           "isActive":"true" //пример
     
        }
     
@@ -249,7 +249,7 @@ __7. api/office/update__
             
         {
             
-            “result”:”success”
+            "result":"success"
             
         }
 
@@ -259,15 +259,15 @@ __8. api/office/save__
     
        {
     
-           “orgId”:””, //обязательный параметр
+           "orgId":"", //обязательный параметр
         
-           “name”:””,
+           "name":"",
         
-           “address”:””,
+           "address":"",
         
-           “phone”,””,
+           "phone","",
         
-           “isActive”:”true”
+           "isActive":"true"
     
        }
     
@@ -275,7 +275,7 @@ __8. api/office/save__
             
         {
             
-            “result”:”success”
+            "result":"success"
             
         }
 
@@ -285,37 +285,41 @@ __9. api/user/list__
     
        {
     
-           “officeId”:””, //обязательный параметр
+           "officeId":"", //обязательный параметр
         
-           “firstName”:””,
+           "firstName":"",
         
-           “lastName”:””,
+           "lastName":"",
         
-           “middleName”:””,
+           "middleName":"",
         
-           “position”,””,
+           "position","",
         
-           “docCode”:””,
+           "docCode":"",
         
-           “citizenshipCode”:””
+           "citizenshipCode":""
     
        }
     
     Out:
+
+    [
     
         {
         
-           “id”:””,
+           "id":"",
         
-           “firstName”:””,
+           "firstName":"",
         
-           “secondName”:””,
+           "secondName":"",
         
-           “middleName”:””,
+           "middleName":"",
         
-           “position”:””
+           "position":""
     
         }
+
+    ]
 
 __10. api/user/{id}__
 
@@ -325,29 +329,29 @@ method:GET
 
         {
     
-            “id”:””,
+            "id":"",
     
-            “firstName”:””,
+            "firstName":"",
     
-            “secondName”:””,
+            "secondName":"",
     
-            “middleName”:””,
+            "middleName":"",
     
-            “position”:””
+            "position":""
     
-            “phone”,””,
+            "phone","",
     
-            “docName”:””,
+            "docName":"",
     
-            “docNumber”:””,
+            "docNumber":"",
     
-            “docDate”:””,
+            "docDate":"",
     
-            “citizenshipName”:””,
+            "citizenshipName":"",
     
-            “citizenshipCode”:””,
+            "citizenshipCode":"",
     
-            “isIdentified”:”true”
+            "isIdentified":"true"
     
         }
 
@@ -357,29 +361,29 @@ __11. api/user/update__
 
         {
     
-            “id”:””, //обязательный параметр
+            "id":"", //обязательный параметр
     
-            “officeId”:””,
+            "officeId":"",
     
-            “firstName”:””, //обязательный параметр
+            "firstName":"", //обязательный параметр
     
-            “secondName”:””,
+            "secondName":"",
     
-            “middleName”:””,
+            "middleName":"",
     
-            “position”:”” //обязательный параметр
+            "position":"" //обязательный параметр
     
-            “phone”,””,
+            "phone","",
     
-            “docName”:””,
+            "docName":"",
     
-            “docNumber”:””,
+            "docNumber":"",
     
-            “docDate”:””,
+            "docDate":"",
     
-            “citizenshipCode”:””,
+            "citizenshipCode":"",
     
-            “isIdentified”:”true” //пример
+            "isIdentified":"true" //пример
     
         }
     
@@ -387,7 +391,7 @@ __11. api/user/update__
 
         {
     
-            “result”:”success”
+            "result":"success"
     
         }
 
@@ -397,29 +401,29 @@ __12. api/user/save__
 
         {
     
-            “officeId”:””, //обязательный параметр
+            "officeId":"", //обязательный параметр
     
-            “firstName”:””, //обязательный параметр
+            "firstName":"", //обязательный параметр
     
-            “secondName”:””,
+            "secondName":"",
     
-            “middleName”:””,
+            "middleName":"",
     
-            “position”:”” //обязательный параметр
+            "position":"" //обязательный параметр
     
-            “phone”,””,
+            "phone","",
     
-            “docCode”:””,
+            "docCode":"",
     
-            “docName”:””,
+            "docName":"",
     
-            “docNumber”:””,
+            "docNumber":"",
     
-            “docDate”:””,
+            "docDate":"",
     
-            “citizenshipCode”:””,
+            "citizenshipCode":"",
     
-            “isIdentified”:”true” //пример
+            "isIdentified":"true" //пример
     
         }
 
@@ -431,9 +435,9 @@ __api/docs__
     
         {
         
-            “name”:“Паспорт гражданина РФ”,
+            "name":"Паспорт гражданина РФ",
             
-            “code”:”21”
+            "code":"21"
         
         },
         
@@ -450,9 +454,9 @@ __api/countries__
 
         {
     
-            “name”:“Российская Федерация”,
+            "name":"Российская Федерация",
         
-            “code”:”643”
+            "code":"643"
     
         },
     
