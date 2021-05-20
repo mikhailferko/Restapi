@@ -10,7 +10,7 @@ public class Doc {
     @Column(name = "id")
     private Integer id;
 
-    @Column(name = "doc_name", length = 50)
+    @Column(name = "doc_name", length = 100)
     private String docName;
 
     @Column(name = "doc_code", length = 10)

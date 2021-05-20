@@ -28,7 +28,7 @@ CREATE INDEX IX_office_org_id ON office(org_id);
 
 CREATE TABLE doc (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    doc_name VARCHAR (50),
+    doc_name VARCHAR (1000),
     doc_code VARCHAR (10)
 );
 
